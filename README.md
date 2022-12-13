@@ -6,18 +6,21 @@ This would make you able to send the Aspera Console Data to InfluxDB in that cas
 
 ## Requirements 
 - Aspera console, tested on *v3.4.2*, but should work on newer versions
+  -  A readonly user on the aspera console
 - Telegraf (to run the 2 scripts)
 - Python 2.7
 - InfluxDB to store the results. (You might be able to reformat the output to whatever TSDB you desire, check the code)
 - Grafana to display the results (Or use any concurrent, doesn't matter)
 
-## How it works
+## How it works + config
 There are 2 Python (2.7, sorry, that was written a long time ago) scripts : 
 - aspera-transfer-bandwidth.py
 - get-aspera-transfer-stats.py
 
 Those 2 Python Scripts should be run by Telegraf regularly, using the telegraf config *exec_script_aspera.conf* file
 This will send data to the output you've chosen in Telegraf, for us it was Influx.
+
+Edit the variables at the top of the 2 python scripts, to provide : A user, A password, The console URL, and the console shortname
 
 ### aspera-transfer-bandwidth.py
 Simply get the bandwidth of each individual transfers every 10 seconds
